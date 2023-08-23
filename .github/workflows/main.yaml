@@ -14,7 +14,8 @@ jobs:
       matrix:
         container:
           [
-            "jenkins-inbound-agent-podman-jdk17"
+            "jenkins-inbound-agent-podman-jdk17",
+            "ubuntu-catatonit"
           ]
 
     runs-on: ubuntu-latest

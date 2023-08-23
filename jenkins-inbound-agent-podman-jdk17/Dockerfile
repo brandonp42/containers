@@ -4,7 +4,8 @@ USER root
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
-    && apt-get install -y podman
+    && apt-get install -y podman \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN echo jenkins:10000:5000 > /etc/subuid; \
     echo jenkins:10000:5000 > /etc/subgid;
