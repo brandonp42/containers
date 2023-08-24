@@ -2,7 +2,7 @@ name: Build and publish container
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   REGISTRY: ghcr.io
@@ -15,11 +15,13 @@ jobs:
         container:
           [
             "jenkins-inbound-agent-podman-jdk17",
-            "ubuntu-catatonit"
+            "ubi9-catatonit",
+            "ubi9-jenkins-agent-jdk17",
+            "ubuntu-catatonit",
           ]
 
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: read
       packages: write
@@ -56,4 +58,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
