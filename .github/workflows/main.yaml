@@ -18,6 +18,7 @@ jobs:
             "ubi9-catatonit",
             "ubi9-jenkins-agent-jdk17",
             "ubuntu-catatonit",
+            "universal-developer-image",
           ]
 
     runs-on: ubuntu-latest
