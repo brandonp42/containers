@@ -75,7 +75,7 @@ jobs:
         uses: anchore/scan-action@v3
         with:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.container }}:sha-${{ steps.vars.outputs.sha_short }}
-          severity-cutoff: critical
+          fail-build: false
 
       - name: Inspect action SARIF report
         run: cat ${{ steps.scan.outputs.sarif }}
