@@ -8,9 +8,6 @@ env:
   REGISTRY: ghcr.io
   IMAGE_PREFIX: ${{ github.repository }}
 
-permissions:
-  actions: read
-
 jobs:
   build-and-push-image:
     strategy:
@@ -26,6 +23,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     permissions:
+      actions: read
       contents: read
       packages: write
 
