@@ -17,8 +17,7 @@ jobs:
             "jenkins-inbound-agent-podman-jdk17",
             "ubi9-catatonit",
             "ubi9-jenkins-agent-jdk17",
-            "ubuntu-catatonit",
-            "universal-developer-image"
+            "ubuntu-catatonit"
           ]
 
     runs-on: ubuntu-22.04
@@ -31,6 +30,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
@@ -40,7 +46,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=pr
             type=ref,event=tag
-            type=sha
+            type=sha,prefix=sha-
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -62,3 +68,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Scan image
+        uses: anchore/scan-action@v3
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.container }}:sha-${{ steps.vars.outputs.sha_short }}
