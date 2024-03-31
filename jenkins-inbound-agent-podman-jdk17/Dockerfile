@@ -12,6 +12,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
 RUN echo jenkins:10000:5000 > /etc/subuid; \
     echo jenkins:10000:5000 > /etc/subgid;
 
