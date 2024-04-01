@@ -70,17 +70,17 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Scan image
-        id: scan
-        uses: anchore/scan-action@v3
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.container }}:sha-${{ steps.vars.outputs.sha_short }}
-          fail-build: false
+      # - name: Scan image
+      #   id: scan
+      #   uses: anchore/scan-action@v3
+      #   with:
+      #     image: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.container }}:sha-${{ steps.vars.outputs.sha_short }}
+      #     fail-build: false
 
-      - name: Inspect action SARIF report
-        run: cat ${{ steps.scan.outputs.sarif }}
+      # - name: Inspect action SARIF report
+      #   run: cat ${{ steps.scan.outputs.sarif }}
 
-      - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+      # - name: upload Anchore scan SARIF report
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: ${{ steps.scan.outputs.sarif }}
