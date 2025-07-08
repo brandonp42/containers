@@ -8,6 +8,7 @@ updates:
       # Check for updates to GitHub Actions every week
       interval: "weekly"
   - package-ecosystem: "docker"
-    directories: "/*"
+    directories:
+      - "/*"
     schedule:
       interval: "daily"
