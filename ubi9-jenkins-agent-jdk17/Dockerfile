@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/podman
+FROM registry.access.redhat.com/ubi9/podman:9.5
 
 COPY jenkins-agent /usr/local/bin/jenkins-agent
 RUN chmod +x /usr/local/bin/jenkins-agent \
